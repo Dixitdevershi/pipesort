@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Token System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center">Token System</h4>
+          </div>
+          <div class="card-body">
+            <form id="token-form">
+              <div class="form-group">
+                <label for="patient-name">Patient Name:</label>
+                <input type="text" id="patient-name" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Generate Token</button>
+            </form>
+            <hr>
+            <div class="text-center">
+              <h5>Current Token:</h5>
+             
+                <p id="current-token">t-100</p>
+              
+              
+            </div>
+            <hr>
+            <div class="text-center">
+              <h5>Previous Tokens:</h5>
+              <ul id="previous-tokens"></ul>
+            </div>
+            <button class="btn btn-primary" id="next-token-btn" onclick="nextToken()">Next Token</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    var currentToken = document.getElementById('current-token');
+    var tokenList = [];
+
+    function nextToken() {
+      if (tokenList.length > 0) {
+        currentToken.textContent = tokenList.shift();
+      } else {
+        alert('No more tokens available!');
+      }
+    }
+
+    var form = document.querySelector('#token-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = document.getElementById('patient-name');
+      var lastToken = localStorage.getItem('lastToken') || 't-100';
+      var tokenNumber = parseInt(lastToken.slice(2)) + 1;
+      var nextToken = 't-' + tokenNumber.toString();
+      localStorage.setItem('lastToken', nextToken);
+      var listItem = document.createElement('li');
+      listItem.textContent = nextToken + ' - ' + input.value;
+      var previousTokensList = document.getElementById('previous-tokens');
+      previousTokensList.appendChild(listItem);
+      tokenList.push(nextToken);
+      input.value = '';
+      localStorage.setItem('currentToken', nextToken);
+    });
+
+
+
+
+
+   
+
+
+
+    
+//     // Generate a new token
+// const token = generateToken();
+
+// // Save the token in local storage
+// localStorage.setItem('currentToken', token);
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+   

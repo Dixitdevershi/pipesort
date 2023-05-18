@@ -1,0 +1,13 @@
+#next-token-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    
+  }
+  button{
+    text-align: center;
+  }
